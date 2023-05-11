@@ -20,11 +20,11 @@ secretKey = key
 httpClient = None
 myurl = 'https://fanyi-api.baidu.com/api/trans/vip/translate'  # 通用翻译API HTTP地址
  
-fromLang = 'en'       # 原文语种
-toLang = 'zh'           # 译文语种
+fromLang = 'zh'       # 原文语种
+toLang = 'en'           # 译文语种
 
-prompt_file = 'english/drawbench.txt'
-results_file = 'chinese/drawbench.txt'
+prompt_file = 'chinese/action_idioms.txt'
+results_file = 'english/action_idioms.txt'
 
 prompts = open(prompt_file, 'r').readlines()
 result_file = open(results_file, 'a')
@@ -62,7 +62,6 @@ for ind, prompt in enumerate(prompts):
         print(e)
         break
 
-result_file.write('\n')
 
 if httpClient:
     httpClient.close()
