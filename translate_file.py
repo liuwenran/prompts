@@ -27,10 +27,12 @@ prompt_file = 'english/drawbench.txt'
 results_file = 'chinese/drawbench.txt'
 
 prompts = open(prompt_file, 'r').readlines()
+result_file = open(results_file, 'a')
 
 results = []
 httpClient = None
-for prompt in prompts:
+for ind, prompt in enumerate(prompts):
+    print(ind)
 
     salt = random.randint(32768, 65536)
     # 手动录入翻译内容，q存放
@@ -53,12 +55,14 @@ for prompt in prompts:
 
         result += '\n'
         results.append(result)
+        result_file.write(result)
         time.sleep(1)
     except Exception as e:
-        import pdb;pdb.set_trace();
-        print (e)
+        print('exception occured')
+        print(e)
+        break
 
-open(results_file, 'w').writelines(results)
+result_file.write('\n')
 
 if httpClient:
     httpClient.close()
